@@ -1,0 +1,2 @@
+# Amazon Linux 2023 with Tesseract 5
+This image builds Tesseract OCR version 5 and its dependency Leptonica on an amazon linux 2023 image.
