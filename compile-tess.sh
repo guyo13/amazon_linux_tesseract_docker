@@ -3,16 +3,18 @@
 BASE_DIR=`pwd`
 TESS_DIR="$BASE_DIR/tesseract-5.3.3"
 LEPT_DIR="$BASE_DIR/leptonica-1.83.1"
+NUM_THREADS=`nproc`
+MAKE_FLAGS="-j$NUM_THREADS"
 
 do_cmake_shared() {
-   	cmake .. -DBUILD_SHARED_LIBS=ON \
-	&& make \
+    cmake .. -DBUILD_SHARED_LIBS=ON \
+    && make $MAKE_FLAGS \
     && make install
 }
 
 do_cmake() {
-   	cmake .. \
-	&& make \
+    cmake .. \
+    && make $MAKE_FLAGS \
     && make install
 }
 
@@ -31,29 +33,29 @@ download_tesseract() {
 }
 
 compile_shared() {
-	cd $LEPT_DIR\
-	&& mkdir build \
-	&& cd build \
-   	&& do_cmake_shared \
+    cd $LEPT_DIR \
+    && mkdir build \
+    && cd build \
+    && do_cmake_shared \
     && rm -rf * \
-	cd $TESS_DIR \
-	&& mkdir build \
-	&& cd build \
-   	&& do_cmake_shared \
+    cd $TESS_DIR \
+    && mkdir build \
+    && cd build \
+    && do_cmake_shared \
     && rm -rf * \
     && cd $BASE_DIR
 }
 
 compile_static() {
-	cd $LEPT_DIR\
-	&& mkdir build \
-	&& cd build \
-   	&& do_cmake \
+    cd $LEPT_DIR \
+    && mkdir build \
+    && cd build \
+    && do_cmake \
     && rm -rf * \
-	cd $TESS_DIR \
-	&& mkdir build \
-	&& cd build \
-   	&& do_cmake \
+    cd $TESS_DIR \
+    && mkdir build \
+    && cd build \
+    && do_cmake \
     && rm -rf * \
     && cd $BASE_DIR
 }
@@ -81,7 +83,7 @@ main() {
     && compile_shared \
     && compile_static \
     && cleanup \
-	&& ldconfig -v
+    && ldconfig -v
 }
 
 main
