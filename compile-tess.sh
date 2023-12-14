@@ -25,7 +25,7 @@ download_leptonica() {
 	&& tar -xzf leptonica-1.83.1.tar.gz
 }
 
-download tesseract() {
+download_tesseract() {
     wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.3.tar.gz \
 	&& tar -xzf 5.3.3.tar.gz
 }
