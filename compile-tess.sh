@@ -33,16 +33,18 @@ download_tesseract() {
 }
 
 compile_shared() {
+    echo "Compiling Leptonica (shared)"
     cd $LEPT_DIR \
     && mkdir build \
     && cd build \
     && do_cmake_shared \
-    && rm -rf * \
+    && cd .. && rm -rf build \
+    && echo "Compiling Tesseract (shared)"
     cd $TESS_DIR \
     && mkdir build \
     && cd build \
     && do_cmake_shared \
-    && rm -rf * \
+    && cd .. && rm -rf build \
     && cd $BASE_DIR
 }
 
@@ -51,12 +53,12 @@ compile_static() {
     && mkdir build \
     && cd build \
     && do_cmake \
-    && rm -rf * \
-    cd $TESS_DIR \
+    && cd .. && rm -rf build \
+    && cd $TESS_DIR \
     && mkdir build \
     && cd build \
     && do_cmake \
-    && rm -rf * \
+    && cd .. && rm -rf build \
     && cd $BASE_DIR
 }
 
