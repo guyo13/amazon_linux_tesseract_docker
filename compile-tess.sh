@@ -49,12 +49,14 @@ compile_shared() {
 }
 
 compile_static() {
+    echo "Compiling Leptonica (static)"
     cd $LEPT_DIR \
     && mkdir build \
     && cd build \
     && do_cmake \
     && cd .. && rm -rf build \
-    && cd $TESS_DIR \
+    && echo "Compiling Tesseract (shared)"
+    cd $TESS_DIR \
     && mkdir build \
     && cd build \
     && do_cmake \
@@ -78,6 +80,7 @@ cleanup() {
 }
 
 main() {
+    echo "MAKE_FLAGS: $MAKE_FLAGS"
     cleanup \
     && setup_ldconfig \
     && download_leptonica \
